@@ -10,14 +10,7 @@ const ordersSchema = new Schema({
     type: Schema.Types.ObjectId,
     required: true,
   },
-  tasklat: {
-    type: Number,
-    required: true,
-  },
-  tasklng: {
-    type: Number,
-    required: true,
-  },
+
   orderdate: {
     type: String,
     required: true,
@@ -38,7 +31,7 @@ const ordersSchema = new Schema({
     type: String,
     required: true,
   },
-  location: {
+  address:{
     type: String,
     required: true,
   },

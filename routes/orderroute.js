@@ -11,14 +11,12 @@ router.post("/addorder", function (req, res, next) {
   Order.create({
     vendorid: req.body.vendorid,
     userid: req.body.userid,
-    tasklat: req.body.tasklat,
-    tasklng: req.body.tasklng,
     orderdate: req.body.orderdate,
     ordertime: req.body.ordertime,
     productname: req.body.productname,
     status: req.body.status,
     productid: req.body.productid,
-    location: req.body.location,
+    address: req.body.address,
     quantity: req.body.quantity,
     amount: req.body.amount,
   })
