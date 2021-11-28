@@ -3,11 +3,11 @@ const Schema = mongoose.Schema;
 
 const ordersSchema = new Schema({
   vendorid: {
-    type: Schema.Types.ObjectId,
+    type: String,
     required: true,
   },
   userid: {
-    type: Schema.Types.ObjectId,
+    type:String,
     required: true,
   },
 
