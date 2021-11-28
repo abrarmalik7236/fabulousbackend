@@ -7,7 +7,7 @@ const ordersSchema = new Schema({
     required: true,
   },
   userid: {
-    type:String,
+    type: String,
     required: true,
   },
 
@@ -34,9 +34,11 @@ const ordersSchema = new Schema({
   amount: {
     type: String,
   },
-  product: {
-    type: Array,
-  },
+  product: [
+    {
+      type: String,
+    },
+  ],
 });
 
 module.exports = mongoose.model("Order", ordersSchema);
