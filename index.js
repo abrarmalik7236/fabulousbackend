@@ -31,6 +31,7 @@ app.use("/", require("./routes/productsroute"));
 app.use("/", require("./routes/vendorroute"));
 app.use("/", require("./routes/cartroute"));
 app.use("/", require("./routes/latlngroute"));
+app.use("/", require("./routes/orderroute"));
 app.listen(port, () => {
   console.log("port running on " + port);
 });
