@@ -88,6 +88,20 @@ router.delete("/deleteproduct/:id", function (req, res) {
   );
 });
 
+///delete all the products using userid
+router.delete("/deleteallproductbyuserid/:userid", function (req, res) {
+  CartProvider.deleteMany(
+    { userid: req.params.userid },
+
+    function (err, response) {
+      if (err)
+        res.json({
+          message: "Error in deleteproduct with userid " + req.params.userid,
+        });
+      res.json(response);
+    }
+  );
+});
 router.post("/editproduct/:id", function (req, res) {
   CartProvider.findByIdAndUpdate(
     { _id: req.params.id },
