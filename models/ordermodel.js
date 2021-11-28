@@ -34,9 +34,7 @@ const ordersSchema = new Schema({
   amount: {
     type: String,
   },
-  product: {
-    type: String,
-  },
+  product: { type: Array, default: [] },
 });
 
 module.exports = mongoose.model("Order", ordersSchema);
