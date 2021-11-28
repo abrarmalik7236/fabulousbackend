@@ -19,19 +19,11 @@ const ordersSchema = new Schema({
     type: String,
     required: true,
   },
-
-  productname: {
-    type: String,
-    required: true,
-  },
   status: {
     type: String,
   },
-  productid: {
-    type: String,
-    required: true,
-  },
-  address:{
+
+  address: {
     type: String,
     required: true,
   },
@@ -41,6 +33,9 @@ const ordersSchema = new Schema({
   },
   amount: {
     type: String,
+  },
+  product: {
+    type: Array,
   },
 });
 

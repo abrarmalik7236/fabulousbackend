@@ -13,12 +13,11 @@ router.post("/addorder", function (req, res, next) {
     userid: req.body.userid,
     orderdate: req.body.orderdate,
     ordertime: req.body.ordertime,
-    productname: req.body.productname,
     status: req.body.status,
-    productid: req.body.productid,
     address: req.body.address,
     quantity: req.body.quantity,
     amount: req.body.amount,
+    product:req.body.product,
   })
     .then(
       (Orders) => {
