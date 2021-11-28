@@ -4,20 +4,16 @@ const Schema = mongoose.Schema;
 const ordersSchema = new Schema({
   vendorid: {
     type: String,
-    required: true,
   },
   userid: {
     type: String,
-    required: true,
   },
 
   orderdate: {
     type: String,
-    required: true,
   },
   ordertime: {
     type: String,
-    required: true,
   },
   status: {
     type: String,
@@ -25,11 +21,9 @@ const ordersSchema = new Schema({
 
   address: {
     type: String,
-    required: true,
   },
   quantity: {
     type: String,
-    required: true,
   },
   amount: {
     type: String,
