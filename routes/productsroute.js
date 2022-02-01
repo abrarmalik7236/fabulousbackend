@@ -88,5 +88,14 @@ router.post("/editproduct/:id", function (req, res) {
     }
   );
 });
+router.get("/getallfavoriteproducts", function (req, res, next) {
+  ProductProvider.find({ isfavorite: "true" }, function (error, results) {
+    if (error) {
+      return next(error);
+    }
+    // Respond with valid data
+    res.json(results);
+  });
+});
 
 module.exports = router;

@@ -16,6 +16,7 @@ router.post("/addvendorinfo", function (req, res, next) {
     address: req.body.address,
     picture: req.body.picture,
     email: req.body.email,
+    vendortype: req.body.vendortype,
   })
     .then(
       (Vendorinformation) => {
@@ -54,16 +55,13 @@ router.delete("/delbook/:name", function (req, res, next) {
   );
 });
 router.get("/allshops", function (req, res, next) {
-  Vendorinformation.find(
-    {},
-    function (error, results) {
-      if (error) {
-        return next(error);
-      }
-      // Respond with valid data
-      res.json(results);
+  Vendorinformation.find({}, function (error, results) {
+    if (error) {
+      return next(error);
     }
-  );
+    // Respond with valid data
+    res.json(results);
+  });
 });
 router.put("/updatepetinfo/:id", function (req, res, next) {
   Vendorinformation.findOneAndUpdate(
@@ -100,7 +98,7 @@ router.put("/updatepetinfo/:id", function (req, res, next) {
 
 router.post("/updatevendorinfos/:vendorid", function (req, res) {
   Vendorinformation.findOneAndUpdate(
-    {vendorid: req.params.vendorid},
+    { vendorid: req.params.vendorid },
     { $set: req.body },
     { new: true },
 

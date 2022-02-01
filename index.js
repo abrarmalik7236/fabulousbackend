@@ -32,6 +32,13 @@ app.use("/", require("./routes/vendorroute"));
 app.use("/", require("./routes/cartroute"));
 app.use("/", require("./routes/latlngroute"));
 app.use("/", require("./routes/orderroute"));
+app.use("/", require("./routes/earningroute"));
+app.use("/", require("./routes/productreviewroute"));
+app.use("/", require("./routes/gymroute"));
+app.use("/", require("./routes/clinicroute"));
+app.use("/", require("./routes/transactionroute"));
+app.use("/", require("./routes/fcmroute"));
+
 app.listen(port, () => {
   console.log("port running on " + port);
 });

@@ -74,9 +74,9 @@ router.get("/getcartbyproductid/:productid", function (req, res, next) {
 });
 ///get products by using vendorid
 
-router.delete("/deleteproduct/:id", function (req, res) {
-  CartProvider.deleteOne(
-    { _id: req.params.id },
+router.delete("/deleteproduct/:productid", function (req, res) {
+  CartProvider.findOneAndDelete(
+    { productid: req.params.productid },
 
     function (err, response) {
       if (err)
@@ -88,6 +88,19 @@ router.delete("/deleteproduct/:id", function (req, res) {
   );
 });
 
+router.delete("/deletecartproductbyid/:id", function (req, res) {
+  CartProvider.findOneAndDelete(
+    { _id: req.params.id },
+
+    function (err, response) {
+      if (err)
+        res.json({
+          message: "Error in deleteproduct with id " + req.params.id,
+        });
+      res.json(response);
+    }
+  );
+});
 ///delete all the products using userid
 router.delete("/deleteallproductbyuserid/:userid", function (req, res) {
   CartProvider.deleteMany(

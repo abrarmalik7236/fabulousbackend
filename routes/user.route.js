@@ -159,4 +159,31 @@ router.post("/signin", (req, res) => {
     }
   );
 });
+
+router.post("/updatefcm/:id", function (req, res) {
+  User.findOneAndUpdate(
+    { _id: req.params.id },
+    { $set: req.body },
+    { new: true },
+
+    function (err, response) {
+      if (err)
+        res.json({
+          message: "Error in giveresponse" + req.params.id,
+        });
+      res.json(response);
+    }
+  );
+});
+
+router.get("/getuserdetails/:id", function (req, res, next) {
+  User.find({ _id: req.params.id }).exec(function (error, results) {
+    if (error) {
+      return next(error);
+    }
+
+    // Respond with valid data
+    res.json(results);
+  });
+});
 module.exports = router;

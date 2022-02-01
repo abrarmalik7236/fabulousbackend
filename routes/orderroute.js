@@ -17,7 +17,17 @@ router.post("/addorder", function (req, res, next) {
     address: req.body.address,
     quantity: req.body.quantity,
     amount: req.body.amount,
-    product:req.body.product,
+    username: req.body.username,
+    useremail: req.body.useremail,
+    userphoneno: req.body.userphoneno,
+    productimage: req.body.productimage,
+    producttitle: req.body.producttitle,
+    category: req.body.category,
+    description: req.body.description,
+    productprice: req.body.productprice,
+    productid: req.body.productid,
+    paymenttype: req.body.paymenttype,
+    userfcm: req.body.userfcm,
   })
     .then(
       (Orders) => {
@@ -40,7 +50,29 @@ router.get("/getOrders/:userid", function (req, res, next) {
   });
 });
 router.get("/getOrdersvendor/:vendorid", function (req, res, next) {
-  Order.find({ serviceproviderid: req.params.serviceproviderid }).exec(
+  Order.find({ vendorid: req.params.vendorid }).exec(function (error, results) {
+    if (error) {
+      return next(error);
+    }
+
+    // Respond with valid data
+    res.json(results);
+  });
+});
+
+router.get("/getpendingorders/:vendorid", function (req, res, next) {
+  Order.find({ vendorid: req.params.vendorid, status: "pending" }).exec(
+    function (error, results) {
+      if (error) {
+        return next(error);
+      }
+      // Respond with valid data
+      res.json(results);
+    }
+  );
+});
+router.get("/getvendorcompletedorders/:vendorid", function (req, res, next) {
+  Order.find({ vendorid: req.params.vendorid, status: "completed" }).exec(
     function (error, results) {
       if (error) {
         return next(error);
@@ -61,6 +93,56 @@ router.delete("/delOrder/:userid", function (req, res, next) {
 });
 
 router.post("/updateorderstatus/:id", function (req, res) {
+  Order.findOneAndUpdate(
+    {
+      "product.productid": req.params.id,
+    },
+    { $set: { "product.$.productstatus": req.body.productstatus } },
+    { new: true },
+
+    function (err, response) {
+      if (err) {
+        console.log(err);
+        res.json({
+          message: "Error in updatestatus with id " + req.params.id,
+        });
+      }
+
+      res.json(response);
+      console.log(response);
+      console.log("update successfully");
+    }
+  );
+});
+
+router.post("/updateorderbyid/:id", function (req, res) {
+  var orderdetails = {
+    productimage: req.body.productimage,
+    producttitle: req.body.producttitle,
+    category: req.body.category,
+    description: req.body.description,
+    productprice: req.body.productprice,
+    availability: req.body.availability,
+    productstatus: req.body.productstatus,
+    productid: req.body.productid,
+  };
+  Order.findByIdAndUpdate(
+    { _id: req.params.id },
+    { $push: { product: orderdetails } },
+    { new: true },
+
+    function (err, response) {
+      if (err)
+        res.json({
+          message: "Error in updatestatus with id " + req.params.id,
+        });
+      res.json(response);
+      console.log(response);
+    }
+  );
+});
+
+router.post("/updateorderbyorderid/:id", function (req, res) {
   Order.findByIdAndUpdate(
     { _id: req.params.id },
     { $set: req.body },
@@ -69,7 +151,7 @@ router.post("/updateorderstatus/:id", function (req, res) {
     function (err, response) {
       if (err)
         res.json({
-          message: "Error in updatestatus with id " + req.params.id,
+          message: "Error in updateorderbyorderid with id " + req.params.id,
         });
       res.json(response);
     }

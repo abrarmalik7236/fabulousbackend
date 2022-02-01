@@ -14,6 +14,9 @@ const newSchema = new Schema({
     type: String,
     required: true,
   },
+  fcmtoken: {
+    type: String,
+  },
 });
 
 module.exports = mongoose.model("User", newSchema);

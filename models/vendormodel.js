@@ -9,7 +9,8 @@ const vendorprovider = new Schema({
   vendorid: { type: String, required: true },
   reviews: [String],
   address: { type: String },
-  picture: { type: String},
+  picture: { type: String },
+  vendortype: { type: String },
 });
 
 module.exports = mongoose.model("Vendor", vendorprovider);
