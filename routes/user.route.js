@@ -186,4 +186,14 @@ router.get("/getuserdetails/:id", function (req, res, next) {
     res.json(results);
   });
 });
+router.get("/getallstackholders/:usertype", function (req, res, next) {
+  User.find({ usertype: req.params.usertype }).exec(function (error, results) {
+    if (error) {
+      return next(error);
+    }
+
+    // Respond with valid data
+    res.json(results);
+  });
+});
 module.exports = router;
