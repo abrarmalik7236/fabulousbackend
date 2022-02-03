@@ -49,6 +49,15 @@ router.get("/getOrders/:userid", function (req, res, next) {
     res.json(results);
   });
 });
+router.get("/getAllorders", function (req, res, next) {
+  Order.find({}).exec(function (error, results) {
+    if (error) {
+      return next(error);
+    }
+    // Respond with valid data
+    res.json(results);
+  });
+});
 router.get("/getOrdersvendor/:vendorid", function (req, res, next) {
   Order.find({ vendorid: req.params.vendorid }).exec(function (error, results) {
     if (error) {

@@ -18,6 +18,7 @@ router.post("/addtransaction", function (req, res, next) {
     username: req.body.username,
     branchcode: req.body.branchcode,
     accountnumber: req.body.accountnumber,
+    status: req.body.status,
   })
     .then(
       (Transaction) => {
@@ -33,7 +34,19 @@ router.post("/addtransaction", function (req, res, next) {
 
 /// api for getTransactionbyvendorid
 router.get("/gettransactionbyvendorid/:vendorid", function (req, res, next) {
-  Transaction.find({ vendorid: req.params.vendorid }, function (error, results) {
+  Transaction.find(
+    { vendorid: req.params.vendorid },
+    function (error, results) {
+      if (error) {
+        return next(error);
+      }
+
+      res.json(results);
+    }
+  );
+});
+router.get("/getpendingtransactions", function (req, res, next) {
+  Transaction.find({}, function (error, results) {
     if (error) {
       return next(error);
     }
@@ -41,7 +54,6 @@ router.get("/gettransactionbyvendorid/:vendorid", function (req, res, next) {
     res.json(results);
   });
 });
-
 router.post("/updateTransactionbyvendorid/:id", function (req, res) {
   Transaction.findOneAndUpdate(
     { vendorid: req.params.id },
@@ -57,7 +69,21 @@ router.post("/updateTransactionbyvendorid/:id", function (req, res) {
     }
   );
 });
+router.post("/updatetransactionsbyid/:id", function (req, res) {
+  Transaction.findOneAndUpdate(
+    { _id: req.params.id },
+    { $set: req.body },
+    { new: true },
 
+    function (err, response) {
+      if (err)
+        res.json({
+          message: "Error in giveresponse" + req.params.id,
+        });
+      res.json(response);
+    }
+  );
+});
 router.delete("/deletetransactionbyid/:id", function (req, res, next) {
   Transaction.deleteOne({ _id: req.params.id }, function (error, results) {
     if (error) {
