@@ -60,9 +60,9 @@ router.get("/getcartbyuserid/:userid", function (req, res, next) {
 });
 ///get product by product id
 
-router.get("/getcartbyproductid/:productid", function (req, res, next) {
+router.get("/getcartbyproductid/:productid/:userid", function (req, res, next) {
   CartProvider.find(
-    { productid: req.params.productid },
+    { productid: req.params.productid, userid: req.params.userid },
     function (error, results) {
       if (error) {
         return next(error);

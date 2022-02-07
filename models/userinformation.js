@@ -2,22 +2,11 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const userinformation = new Schema({
-  petimgurl: String,
-  pettype: String,
-  petname: String,
-  petbreed: String,
-  petdescription: String,
-  petdate: String,
-  petweight: String,
-  petlikestodo: String,
-  petlikestoeat: String,
-  petanycomment: String,
-  ownername: String,
-  ownerdob: String,
-  ownercontactno: String,
-  ownerdesciption: String,
-  ownerprofilepic: String,
-
+  username: String,
+  userphoneno: String,
+  userid: String,
+  userprofilepic: String,
+  useremail: String,
   _id: Schema.Types.ObjectId,
 });
 

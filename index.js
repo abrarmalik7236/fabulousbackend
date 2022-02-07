@@ -38,7 +38,7 @@ app.use("/", require("./routes/gymroute"));
 app.use("/", require("./routes/clinicroute"));
 app.use("/", require("./routes/transactionroute"));
 app.use("/", require("./routes/fcmroute"));
-
+app.use("/", require("./routes/favroute"));
 app.listen(port, () => {
   console.log("port running on " + port);
 });

@@ -71,6 +71,12 @@ const ordersSchema = new Schema({
   userfcm: {
     type: String,
   },
+  userlat: {
+    type: String,
+  },
+  userlng: {
+    type: String,
+  },
 });
 
 module.exports = mongoose.model("Order", ordersSchema);

@@ -35,7 +35,7 @@ router.post("/addserviceprovider", function (req, res, next) {
     )
     .catch((err) => next(err));
 });
-router.get("/getuserinformation/:userid", function (req, res, next) {
+router.get("/getuserinformations/:userid", function (req, res, next) {
   serviceProvider
     .findOne({ _id: req.params.userid })
     .exec(function (error, results) {

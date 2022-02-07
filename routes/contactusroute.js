@@ -11,7 +11,7 @@ router.get("/", function (req, res, next) {
 router.post("/addcomplaint", function (req, res, next) {
   console.log(req.body);
   ContactusProvider.create({
-    userid: req.body.userid,
+
     username: req.body.username,
     message: req.body.message,
     date: req.body.date,

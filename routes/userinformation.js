@@ -9,24 +9,7 @@ router.get("/", function (req, res, next) {
 router.post("/addprofile", function (req, res, next) {
   const userinformation = Userinformation(req.body);
   console.log(req.body);
-  Userinformation.create({
-    petimgurl: req.body.petimgurl,
-    pettype: req.body.pettype,
-    petname: req.body.petname,
-    petbreed: req.body.petbreed,
-    petdescription: req.body.petdescription,
-    petdate: req.body.petdate,
-    petweight: req.body.petweight,
-    petlikestodo: req.body.petlikestodo,
-    petlikestoeat: req.body.petlikestoeat,
-    petanycomment: req.body.petanycomment,
-    ownername: req.body.ownername,
-    ownerdob: req.body.ownerdob,
-    ownercontactno: req.body.ownercontactno,
-    ownerdesciption: req.body.ownerdesciption,
-    ownerprofilepic: req.body.ownerprofilepic,
-    _id: req.body.userid,
-  })
+  Userinformation.create(req.body)
     .then(
       (Userinformation) => {
         console.log("Userinformation has been Added ", Userinformation);
@@ -120,7 +103,6 @@ router.post("/updatepetinfos/:id", function (req, res) {
     }
   );
 });
-
 
 router.post("/updateownerinfos/:id", function (req, res) {
   Userinformation.findByIdAndUpdate(

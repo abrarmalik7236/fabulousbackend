@@ -2,11 +2,11 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const vendorprovider = new Schema({
-  name: { type: String, required: true },
-  email: { type: String, required: true },
-  phoneno: { type: String, required: true },
+  name: { type: String},
+  email: { type: String},
+  phoneno: { type: String},
 
-  vendorid: { type: String, required: true },
+  vendorid: { type: String, },
   reviews: [String],
   address: { type: String },
   picture: { type: String },

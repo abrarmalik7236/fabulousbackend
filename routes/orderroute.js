@@ -28,6 +28,8 @@ router.post("/addorder", function (req, res, next) {
     productid: req.body.productid,
     paymenttype: req.body.paymenttype,
     userfcm: req.body.userfcm,
+    userlat: req.body.userlat,
+    userlng: req.body.userlng,
   })
     .then(
       (Orders) => {
