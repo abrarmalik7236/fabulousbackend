@@ -54,6 +54,19 @@ router.delete("/delbook/:name", function (req, res, next) {
     }
   );
 });
+
+router.delete("/delvendorinfo/:id", function (req, res, next) {
+  Vendorinformation.deleteOne(
+    { vendorid: req.params.id },
+    function (error, results) {
+      if (error) {
+        return next(error);
+      }
+      // Respond with valid data
+      res.json(results);
+    }
+  );
+});
 router.get("/allshops", function (req, res, next) {
   Vendorinformation.find({}, function (error, results) {
     if (error) {

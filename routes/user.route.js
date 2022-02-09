@@ -175,7 +175,15 @@ router.post("/updatefcm/:id", function (req, res) {
     }
   );
 });
-
+router.delete("/deluserinfo/:id", function (req, res, next) {
+  User.deleteOne({ _id: req.params.id }, function (error, results) {
+    if (error) {
+      return next(error);
+    }
+    // Respond with valid data
+    res.json(results);
+  });
+});
 router.get("/getuserdetails/:id", function (req, res, next) {
   User.find({ _id: req.params.id }).exec(function (error, results) {
     if (error) {
