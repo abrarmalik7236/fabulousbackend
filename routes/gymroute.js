@@ -8,16 +8,7 @@ router.get("/", function (req, res, next) {
 });
 router.post("/addmembership", function (req, res, next) {
   console.log(req.body);
-  GymProvider.create({
-    image: req.body.image,
-    vendorid: req.body.vendorid,
-    membershiptitle: req.body.membershiptitle,
-    duration: req.body.duration,
-
-    membershipprice: req.body.membershipprice,
-    description: req.body.description,
-    availability: req.body.availability,
-  })
+  GymProvider.create(req.body)
     .then(
       (GymProvider) => {
         console.log("membership has been Added ", GymProvider);
