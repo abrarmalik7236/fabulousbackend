@@ -13,6 +13,7 @@ router.post("/addproducts", function (req, res, next) {
     vendorid: req.body.vendorid,
     producttitle: req.body.producttitle,
     category: req.body.category,
+    categoryid: req.body.categoryid,
     // city: req.body.city,
 
     description: req.body.description,
@@ -36,6 +37,19 @@ router.post("/addproducts", function (req, res, next) {
 router.get("/getproductsbyid/:vendorid", function (req, res, next) {
   ProductProvider.find(
     { vendorid: req.params.vendorid },
+    function (error, results) {
+      if (error) {
+        return next(error);
+      }
+      // Respond with valid data
+      res.json(results);
+    }
+  );
+});
+
+router.get("/getproductsbycatid/:catid/:vendorid", function (req, res, next) {
+  ProductProvider.find(
+    { categoryid: req.params.catid, vendorid: req.params.vendorid },
     function (error, results) {
       if (error) {
         return next(error);

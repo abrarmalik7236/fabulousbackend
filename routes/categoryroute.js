@@ -1,29 +1,29 @@
 var express = require("express");
 var router = express.Router();
-var GymProvider = require("../models/gymmodel");
+var ProductProvider = require("../models/categorymodel");
 
 /* GET Operations */
 router.get("/", function (req, res, next) {
-  res.send("respond with a gymprovider resource");
+  res.send("respond with a categorymodel resource");
 });
-router.post("/addmembership", function (req, res, next) {
+router.post("/addcategory", function (req, res, next) {
   console.log(req.body);
-  GymProvider.create(req.body)
+  ProductProvider.create(req.body)
     .then(
-      (GymProvider) => {
-        console.log("membership has been Added ", GymProvider);
+      (ProductProvider) => {
+        console.log("category has been Added ", ProductProvider);
         res.statusCode = 200;
         res.setHeader("Content-Type", "application/json");
-        res.json(GymProvider);
+        res.json(ProductProvider);
       },
       (err) => next(err)
     )
     .catch((err) => next(err));
 });
 
-router.get("/getmembershipsbyid/:catid/:vendorid", function (req, res, next) {
-  GymProvider.find(
-    { vendorid: req.params.vendorid, categoryid: req.params.catid },
+router.get("/getcategorybyid/:vendorid", function (req, res, next) {
+  ProductProvider.find(
+    { vendorid: req.params.vendorid },
     function (error, results) {
       if (error) {
         return next(error);
@@ -36,8 +36,8 @@ router.get("/getmembershipsbyid/:catid/:vendorid", function (req, res, next) {
 
 ///get all the list of products
 
-router.get("/getallproducts", function (req, res, next) {
-  GymProvider.find({}, function (error, results) {
+router.get("/getallcategories", function (req, res, next) {
+  ProductProvider.find({}, function (error, results) {
     if (error) {
       return next(error);
     }
@@ -45,24 +45,24 @@ router.get("/getallproducts", function (req, res, next) {
     res.json(results);
   });
 });
-///get deletemembership by using vendorid
+///get products by using vendorid
 
-router.delete("/deletemembership/:id", function (req, res) {
-  GymProvider.deleteOne(
+router.delete("/deletecategory/:id", function (req, res) {
+  ProductProvider.deleteOne(
     { _id: req.params.id },
 
     function (err, response) {
       if (err)
         res.json({
-          message: "Error in deletemembership with id " + req.params.id,
+          message: "Error in deletecategory with id " + req.params.id,
         });
       res.json(response);
     }
   );
 });
 
-router.post("/updatemembership/:id", function (req, res) {
-  GymProvider.findByIdAndUpdate(
+router.post("/editcategory/:id", function (req, res) {
+  ProductProvider.findByIdAndUpdate(
     { _id: req.params.id },
     { $set: req.body },
     { new: true },
@@ -70,11 +70,12 @@ router.post("/updatemembership/:id", function (req, res) {
     function (err, response) {
       if (err)
         res.json({
-          message: "Error in updatemembership with id " + req.params.id,
+          message: "Error in editcategory with id " + req.params.id,
         });
       res.json(response);
     }
   );
 });
+
 
 module.exports = router;

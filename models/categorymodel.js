@@ -2,9 +2,9 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const autoIncrementModelID = require("./counterModel");
 
-const GYMSchema = new Schema({
+const CategorySchema = new Schema({
   id: { type: Number, unique: true, min: 0 },
-  image: {
+  categoryimage: {
     type: String,
     required: true,
   },
@@ -12,11 +12,7 @@ const GYMSchema = new Schema({
     type: String,
     required: true,
   },
-  membershiptitle: {
-    type: String,
-    required: true,
-  },
-  duration: {
+  categorytitle: {
     type: String,
     required: true,
   },
@@ -24,23 +20,13 @@ const GYMSchema = new Schema({
     type: String,
     required: true,
   },
-
-  membershipprice: {
-    type: String,
-  },
-  availability: {
-    type: String,
-  },
-  categoryid: {
-    type: String,
-  },
 });
-GYMSchema.pre("save", function (next) {
+CategorySchema.pre("save", function (next) {
   if (!this.isNew) {
     next();
     return;
   }
 
-  autoIncrementModelID("Gym", this, next);
+  autoIncrementModelID("Category", this, next);
 });
-module.exports = mongoose.model("Gym", GYMSchema);
+module.exports = mongoose.model("Category", CategorySchema);

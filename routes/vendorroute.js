@@ -8,16 +8,7 @@ router.get("/", function (req, res, next) {
 });
 router.post("/addvendorinfo", function (req, res, next) {
   console.log(req.body);
-  Vendorinformation.create({
-    name: req.body.name,
-    vendorid: req.body.vendorid,
-    phoneno: req.body.phoneno,
-    reviews: req.body.reviews,
-    address: req.body.address,
-    picture: req.body.picture,
-    email: req.body.email,
-    vendortype: req.body.vendortype,
-  })
+  Vendorinformation.create(req.body)
     .then(
       (Vendorinformation) => {
         console.log("Vendorinformation has been Added ", Vendorinformation);

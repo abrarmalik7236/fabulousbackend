@@ -8,15 +8,7 @@ router.get("/", function (req, res, next) {
 });
 router.post("/addservice", function (req, res, next) {
   console.log(req.body);
-  ClinicProvider.create({
-    image: req.body.image,
-    vendorid: req.body.vendorid,
-    servicetitle: req.body.servicetitle,
-    category: req.body.category,
-    serviceprice: req.body.serviceprice,
-    description: req.body.description,
-    availability: req.body.availability,
-  })
+  ClinicProvider.create(req.body)
     .then(
       (ClinicProvider) => {
         console.log("clinic service has been Added ", ClinicProvider);
@@ -29,18 +21,21 @@ router.post("/addservice", function (req, res, next) {
     .catch((err) => next(err));
 });
 
-router.get("/getclinicservicesbyid/:vendorid", function (req, res, next) {
-  ClinicProvider.find(
-    { vendorid: req.params.vendorid },
-    function (error, results) {
-      if (error) {
-        return next(error);
+router.get(
+  "/getclinicservicesbycatid/:catid/:vendorid",
+  function (req, res, next) {
+    ClinicProvider.find(
+      { vendorid: req.params.vendorid, categoryid: req.params.catid },
+      function (error, results) {
+        if (error) {
+          return next(error);
+        }
+        // Respond with valid data
+        res.json(results);
       }
-      // Respond with valid data
-      res.json(results);
-    }
-  );
-});
+    );
+  }
+);
 
 ///get all the list of products
 

@@ -31,6 +31,9 @@ const ClinicSchema = new Schema({
   availability: {
     type: String,
   },
+  categoryid: {
+    type: String,
+  },
 });
 ClinicSchema.pre("save", function (next) {
   if (!this.isNew) {

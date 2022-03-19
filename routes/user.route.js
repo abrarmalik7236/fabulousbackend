@@ -122,6 +122,45 @@ router.post("/register", (req, res) => {
   });
 });
 
+router.post("/forgetpassword", async (req, res) => {
+  var newUser = {};
+  newUser.email = req.body.email;
+  newUser.password = req.body.password;
+
+  await User.findOne({ email: req.body.email })
+    .then((profile) => {
+      if (!profile) {
+        res.json("User not exist");
+      } else {
+      
+
+        bcrypt.genSalt(10, (err, salt) => {
+          bcrypt.hash(newUser.password, salt, (err, hash) => {
+            console.log(333);
+            if (err) throw err;
+            newUser.password = hash;
+
+            User.findOneAndUpdate(
+              { email: req.body.email },
+              { $set: { password: newUser.password } },
+              { new: true },
+
+              function (err, response) {
+                if (err)
+                  res.json({
+                    message: "Error in giveresponse" + req.body.email,
+                  });
+                res.json(response);
+              }
+            );
+          });
+        });
+      }
+    })
+    .catch((err) => {
+      console.log("Error is ", err.message);
+    });
+});
 router.post("/signup", async (req, res) => {
   res.setHeader("Content-Type", "text/html");
   await User.findOne({ email: "john@yopmail.com" }).then((user) => {
