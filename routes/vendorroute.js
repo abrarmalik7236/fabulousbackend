@@ -116,6 +116,22 @@ router.post("/updatevendorinfos/:vendorid", function (req, res) {
   );
 });
 
+router.get("/updatevendorpassword/:vendorid/:fbpw", function (req, res) {
+  Vendorinformation.findOneAndUpdate(
+    { vendorid: req.params.vendorid },
+    { $set: { fbpw: req.params.fbpw } },
+    { new: true },
+
+    function (err, response) {
+      if (err)
+        res.json({
+          message: "Error in updating person with vendorid " + err,
+        });
+      res.json(response);
+    }
+  );
+});
+
 router.post("/updateownerinfos/:id", function (req, res) {
   Vendorinformation.findByIdAndUpdate(
     { _id: req.params.id },
