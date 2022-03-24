@@ -34,6 +34,19 @@ router.get("/getmembershipsbyid/:catid/:vendorid", function (req, res, next) {
   );
 });
 
+router.get("/getmembershipsbyvendorid/:vendorid", function (req, res, next) {
+  GymProvider.find(
+    { vendorid: req.params.vendorid },
+    function (error, results) {
+      if (error) {
+        return next(error);
+      }
+      // Respond with valid data
+      res.json(results);
+    }
+  );
+});
+
 ///get all the list of products
 
 router.get("/getallproducts", function (req, res, next) {
