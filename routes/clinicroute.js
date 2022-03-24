@@ -48,6 +48,19 @@ router.get("/getallproducts", function (req, res, next) {
     res.json(results);
   });
 });
+
+router.get("/getclinicservicesbyid/:vendorid", function (req, res, next) {
+  ClinicProvider.find(
+    { vendorid: req.params.vendorid },
+    function (error, results) {
+      if (error) {
+        return next(error);
+      }
+      // Respond with valid data
+      res.json(results);
+    }
+  );
+});
 ///get deletemembership by using vendorid
 
 router.delete("/deleteclinicservice/:id", function (req, res) {
