@@ -8,7 +8,6 @@ const newSchema = new Schema({
   },
   picture: {
     type: String,
-    required: true,
   },
   password: {
     type: String,

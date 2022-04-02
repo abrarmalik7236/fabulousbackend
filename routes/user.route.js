@@ -36,6 +36,7 @@ router.post("/signupwithbycript", async (req, res) => {
     email: req.body.email,
     password: req.body.password,
     usertype: req.body.usertype,
+    picture: req.body.picture,
   });
 
   await User.findOne({ email: newUser.email })
@@ -132,8 +133,6 @@ router.post("/forgetpassword", async (req, res) => {
       if (!profile) {
         res.json("User not exist");
       } else {
-      
-
         bcrypt.genSalt(10, (err, salt) => {
           bcrypt.hash(newUser.password, salt, (err, hash) => {
             console.log(333);
