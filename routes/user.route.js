@@ -213,6 +213,8 @@ router.post("/updatefcm/:id", function (req, res) {
     }
   );
 });
+
+
 router.delete("/deluserinfo/:id", function (req, res, next) {
   User.deleteOne({ _id: req.params.id }, function (error, results) {
     if (error) {
